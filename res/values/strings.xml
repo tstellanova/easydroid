@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">EasydroidActivity!</string>
+    <string name="app_name">Easydroid</string>
+
+    <!--  BTChatActivity -->
+    <string name="title_chat">Terminal</string>
+    <string name="send">Send</string>
+    <string name="not_connected">You are not connected to a device</string>
+    <string name="bt_not_enabled_leaving">Bluetooth was not enabled. Leaving Bluetooth Chat.</string>
+    <string name="title_connecting">connecting...</string>
+    <string name="title_connected_to">connected: </string>
+    <string name="title_not_connected">not connected</string>
+        
+        
+    <!--  DeviceListActivity -->
+    <string name="scanning">scanning for devices...</string>
+    <string name="select_device">select a device to connect</string>
+    <string name="none_paired">No devices have been paired</string>
+    <string name="none_found">No devices found</string>
+    <string name="title_paired_devices">Paired Devices</string>
+    <string name="title_other_devices">Other Available Devices</string>
+    <string name="button_scan">Scan for devices</string>
+    
+    <!-- Options Menu -->
+    <string name="connect_recent">Connect most recent device</string>
+    <string name="connect_new">Pick a device</string>
+        
+<!--     <string name="secure_connect">Connect a device - Secure</string>
+    <string name="insecure_connect">Connect a device - Insecure</string>
+ -->    
+    <string name="bot_command_prompt">Command</string>
+    <string-array name="bot_commands_array">
+        <item>Neutral</item>
+        <item>Walk (a)</item>
+        <item>LED (a)</item>
+        <item>RightLeg (a) (b)</item>
+        <item>RightFoot (a) (b)</item>
+        <item>LeftLeg (a) (b)</item>
+        <item>LeftFoot (a) (b)</item>
+<!--         
+        <item>RightLegOffset</item>
+        <item>LeftFootOffset</item>
+        <item>LeftLegOffset</item>
+        <item>RightFootOffset</item>  
+-->  
+    </string-array>
+        
+</resources>

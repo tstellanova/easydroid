@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ListView
+        android:id="@+id/ioView"
+        android:layout_width="match_parent"
+        android:layout_height="120dp" >
+    </ListView>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/relativeLayout1"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent">
+        
+        <Spinner
+            android:id="@+id/commandPicker1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            />
+        
+        <EditText
+            android:id="@+id/commandParam1"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/commandPicker1"
+            android:inputType="number" >
+            <requestFocus />
+        </EditText>
+        
+        <EditText
+            android:id="@+id/commandParam2"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/commandParam1"
+            android:inputType="number" >
+        </EditText>         
+              
+        <Button
+			android:id="@+id/button_send"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dip"
+			android:layout_marginLeft="10dip"
+			android:layout_below="@id/commandPicker1"
+			android:text="Send" 
+			/>
+
+
+    </RelativeLayout>
+
+</LinearLayout>
