@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:gravity="top"
+    android:orientation="vertical" >
+
+    <ListView
+        android:id="@+id/ioView"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="top" >
+
+    </ListView>
+
+    <TableLayout
+        android:id="@+id/bttonTable"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_below="@id/ioView"
+        android:layout_centerHorizontal="false"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="0dp" >
+
+        <TableRow
+            android:id="@+id/bttRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <ImageButton
+                android:id="@+id/imageButton00"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:contentDescription="Exec program"
+                android:scaleType="fitCenter"
+                android:src="@drawable/program_exec"
+                tools:ignore="HardcodedText" />
+
+            <ImageButton
+                android:id="@+id/imageButton01"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:baselineAlignBottom="true"
+                android:contentDescription="Forward"
+                android:scaleType="fitCenter"
+                android:src="@drawable/yp_arrow"
+                tools:ignore="HardcodedText" />
+
+            <ImageButton
+                android:id="@+id/imageButton02"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:contentDescription="LED"
+                android:scaleType="fitCenter"
+                android:src="@drawable/led_btt"
+                tools:ignore="HardcodedText" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/bttRow2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageButton
+                android:id="@+id/imageButton10"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:baselineAlignBottom="false"
+                android:contentDescription="Left"
+                android:scaleType="fitCenter"
+                android:src="@drawable/lt_arrow"
+                tools:ignore="HardcodedText" />
+
+            <ImageButton
+                android:id="@+id/imageButton11"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:contentDescription="Reverse"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dn_arrow"
+                tools:ignore="HardcodedText" />
+
+            <ImageButton
+                android:id="@+id/imageButton12"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:baselineAlignBottom="true"
+                android:contentDescription="Right"
+                android:scaleType="fitCenter"
+                android:src="@drawable/rt_arrow"
+                tools:ignore="HardcodedText" />
+
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>

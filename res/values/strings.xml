@@ -46,5 +46,8 @@
         <item>RightFootOffset</item>  
 -->  
     </string-array>
+    
+    <string name="butt_send">Send</string>
+    
         
 </resources>

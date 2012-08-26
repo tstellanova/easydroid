@@ -1,5 +1,7 @@
 package com.easybotics.easydroid;
 
+import java.util.Random;
+
 import com.easybotics.bluetooth.BTSessionService;
 import com.easybotics.bluetooth.R;
 
@@ -15,6 +17,7 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,15 +36,17 @@ public class CommandBotActivity extends Activity {
     // Layout Views
     private TextView mTitle;
     private ListView mConversationView;
-    private Button mSendButton;
-    private Spinner mCommandSelector;
-    TextView mParamView1;
-    TextView mParamView2;
+//    private Button mSendButton;
+//    private Spinner mCommandSelector;
+//    TextView mParamView1;
+//    TextView mParamView2;
     
     // Array adapter for the conversation thread
     private ArrayAdapter<String> mConversationArrayAdapter;
     // String buffer for outgoing messages
     private StringBuffer mOutStringBuffer = null;
+    
+    private Random mRandGen;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,9 +55,10 @@ public class CommandBotActivity extends Activity {
 
         if(D) Log.w(TAG, "+++ ON CREATE +++");
         
+        mRandGen = new Random();
         // Set up the window layout
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-        setContentView(R.layout.bot_command);
+        setContentView(R.layout.bot_driving);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
 
         // Set up the custom title
@@ -60,11 +66,11 @@ public class CommandBotActivity extends Activity {
         mTitle.setText(R.string.app_name);
         mTitle = (TextView) findViewById(R.id.title_right_text);
         
-        mCommandSelector = (Spinner) findViewById(R.id.commandPicker1);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this, R.array.bot_commands_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mCommandSelector.setAdapter(adapter);
+//        mCommandSelector = (Spinner) findViewById(R.id.commandPicker1);
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+//                this, R.array.bot_commands_array, android.R.layout.simple_spinner_item);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        mCommandSelector.setAdapter(adapter);
     }
     
     @Override
@@ -72,6 +78,13 @@ public class CommandBotActivity extends Activity {
         super.onStart();
         if(D) Log.w(TAG, "++ ON START ++");
 
+        
+		BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
+		// If the adapter is null, then Bluetooth is not supported
+		if (null == btAdapter) {
+			setupViews();
+			return;
+		}
         // If BT is not on, request that it be enabled.
         // setupChat() will then be called during onActivityResult
         if (!sharedApp.mBTSession.mAdapter.isEnabled()) {
@@ -79,7 +92,7 @@ public class CommandBotActivity extends Activity {
             startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
         // Otherwise, setup the session
         } else {
-        	setupSession();
+        	setupViews();
         }
     }
     
@@ -93,10 +106,12 @@ public class CommandBotActivity extends Activity {
         // onResume() will be called when ACTION_REQUEST_ENABLE activity returns.
         
         if (null == mOutStringBuffer) {
-        	setupSession();
+        	setupViews();
         }
         
-    	sharedApp.mBTSession.setStreamHandler(this.mStreamHandler);
+        if (sharedApp.mBTSession != null) {
+        	sharedApp.mBTSession.setStreamHandler(this.mStreamHandler);
+        }
     }
 
     @Override
@@ -107,42 +122,68 @@ public class CommandBotActivity extends Activity {
     	sharedApp.mBTSession.setStreamHandler(null);
     }
     
-    private void setupSession() {
-        if(D) Log.i(TAG, "setupSession()");
-        
-		mParamView1 = (TextView) findViewById(R.id.commandParam1);
-		mParamView2 = (TextView) findViewById(R.id.commandParam2);
+    private void setupViews() {
+        if(D) Log.i(TAG, "setupViews()");
         
         // Initialize the array adapter for the conversation thread
         mConversationArrayAdapter = new ArrayAdapter<String>(this, R.layout.chat_message);
         mConversationView = (ListView) findViewById(R.id.ioView);
         mConversationView.setAdapter(mConversationArrayAdapter);
-
-        // Initialize the send button with a listener that for click events
-        mSendButton = (Button) findViewById(R.id.button_send);
-        mSendButton.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                // Send a message using content of the edit text widget
-            	String selectedCmd = (String) mCommandSelector.getSelectedItem();
-                String param1 = mParamView1.getText().toString();
-                String param2 = mParamView2.getText().toString();
-
-                //Substitute input parameters 
-                String message = selectedCmd;
-                if ((null != param1) && (param1.length() > 0) ) {
-                	message = message.replace("(a)",param1);
-                    if ((null != param2) && (param2.length() > 0) ) {
-                    	message = message.replace("(b)",param2);
-                    }
-                }
-
-                sendMessage(message);
-            }
-        });
- 
-
+        
         // Initialize the buffer for outgoing messages
         mOutStringBuffer = new StringBuffer("");
+        
+        //Init button actions
+        ImageButton b = (ImageButton)findViewById(R.id.imageButton00);
+        b.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                sendMessage("startA;"); //run program a 
+            }
+        });
+        
+        b = (ImageButton)findViewById(R.id.imageButton01);
+        b.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                sendMessage("walkF 1;");//walk forward
+            }
+        });
+        
+        b = (ImageButton)findViewById(R.id.imageButton02);
+        b.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+            	int red = mRandGen.nextInt(255);
+            	int green = mRandGen.nextInt(255);
+            	int blue = mRandGen.nextInt(255);
+            	
+            	String msg =  String.format("LED %d %d %d;",red,green,blue);//LED color
+                sendMessage(msg);
+            }
+        });
+        
+        b = (ImageButton)findViewById(R.id.imageButton10);
+        b.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                sendMessage("turnL 1;"); //turn left
+            }
+        });
+        
+        b = (ImageButton)findViewById(R.id.imageButton11);
+        b.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                sendMessage("walkB 1;");//walk backward
+            }
+        });
+        
+        b = (ImageButton)findViewById(R.id.imageButton12);
+        b.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                sendMessage("turnR 1;");//turn right
+            }
+        });
+
+
+
+
     }
     
     private void updateListViewScroll() {
@@ -162,7 +203,10 @@ public class CommandBotActivity extends Activity {
     private void sendMessage(String message) {
         // Check that we're actually connected before trying anything
     	
-    	if (sharedApp.mBTSession.mState !=   BTSessionService.STATE_CONNECTED) {
+        if(D) Log.i(TAG, "sendMessage: " + message);
+
+    	if ((null == sharedApp.mBTSession) || 
+    			( sharedApp.mBTSession.mState !=   BTSessionService.STATE_CONNECTED) ) {
             Toast.makeText(this, R.string.not_connected, Toast.LENGTH_SHORT).show();
             return;
         }

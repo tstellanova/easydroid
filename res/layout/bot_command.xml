@@ -1,54 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="top"
     android:orientation="vertical" >
 
     <ListView
         android:id="@+id/ioView"
         android:layout_width="match_parent"
-        android:layout_height="120dp" >
+        android:layout_height="320dp"
+        android:layout_gravity="top" >
+
     </ListView>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/relativeLayout1"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent">
-        
-        <Spinner
-            android:id="@+id/commandPicker1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-            />
-        
-        <EditText
-            android:id="@+id/commandParam1"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/commandPicker1"
-            android:inputType="number" >
-            <requestFocus />
-        </EditText>
-        
-        <EditText
-            android:id="@+id/commandParam2"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/commandParam1"
-            android:inputType="number" >
-        </EditText>         
-              
-        <Button
-			android:id="@+id/button_send"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="10dip"
-			android:layout_marginLeft="10dip"
-			android:layout_below="@id/commandPicker1"
-			android:text="Send" 
-			/>
 
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="240dp"
+    android:layout_below="@+id/ioView"
+    android:layout_centerHorizontal="true" >
 
+    <Spinner
+        android:id="@+id/commandPicker1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/commandParam1"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/commandPicker1"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/commandParam2"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/commandParam1"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/button_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/commandPicker1"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="10dip"
+        android:text="@string/butt_send" />
+    
     </RelativeLayout>
+    
+</RelativeLayout>
 
-</LinearLayout>

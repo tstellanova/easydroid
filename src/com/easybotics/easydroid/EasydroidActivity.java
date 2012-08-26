@@ -55,7 +55,10 @@ public class EasydroidActivity extends Activity {
 		if (null == btAdapter) {
 			Toast.makeText(this, "Bluetooth not available", Toast.LENGTH_LONG)
 					.show();
-			finish();
+			//TODO finish();
+			Intent chatIntent = new Intent(mSharedApp,
+					CommandBotActivity.class);
+			startActivity(chatIntent);
 			return;
 		}
 
@@ -162,7 +165,7 @@ public class EasydroidActivity extends Activity {
 		mSharedApp.mBTSession.connectDevice(address, secure);
 	}
 
-	// The Handler that gets information back from the BluetoothChatService
+	// The Handler that gets information back from the BTSessionService
 	private final Handler mConnectionStateHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
