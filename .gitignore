@@ -1,2 +1,15 @@
 .DS_Store
 *.class
+local.properties
+
+laylay1.png
+
+gen/com/easybotics/bluetooth/R.java
+
+gen/com/easybotics/bluetooth/BuildConfig.java
+
+bin/resources.ap_
+
+bin/classes.dex
+
+bin/AndroidManifest.xml
