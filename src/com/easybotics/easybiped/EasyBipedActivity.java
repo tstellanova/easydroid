@@ -1,4 +1,4 @@
-package com.easybotics.easydroid;
+package com.easybotics.easybiped;
 
 import com.easybotics.bluetooth.R;
 
@@ -19,10 +19,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class EasydroidActivity extends Activity {
+public class EasyBipedActivity extends Activity {
 
 	// Debugging
-	private static final String TAG = "easydroid";
+	private static final String TAG = "EasyBiped";
 	private static final boolean D = true;
 
 	// Intent request codes

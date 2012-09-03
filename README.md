@@ -1,2 +1,2 @@
-Hello easybiped users!
+Hello EasyBiped users!
 

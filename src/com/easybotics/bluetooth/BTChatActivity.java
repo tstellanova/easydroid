@@ -19,7 +19,7 @@ package com.easybotics.bluetooth;
 
 
 import com.easybotics.bluetooth.R;
-import com.easybotics.easydroid.MainApplication;
+import com.easybotics.easybiped.MainApplication;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;

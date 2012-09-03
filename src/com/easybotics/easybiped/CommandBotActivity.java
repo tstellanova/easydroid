@@ -1,4 +1,4 @@
-package com.easybotics.easydroid;
+package com.easybotics.easybiped;
 
 import java.util.Random;
 
